@@ -1,0 +1,27 @@
+Apache Lucene NearRealtimeSearch Guide
+
+version 1.0 November 9, 2011
+--------------------------------
+
+I will show through this documentation how to successfully configure Py-Lucene 3.4.0-x
+Since Lucene is written in Java for the JVM, you will need JCC to use python to communicate 
+with the JVM. Standard builds of Py-Lucene should include JCC in the sources.
+
+Basic requirements:
+
+* Java Development Kit (JDK)
+* Ant
+* Java Runtime Environment (JRE)
+* The setuptools package is required to build and run PyLucene on Python 2.3.5. With later versions of Python, setuptools is only required for 
+  shared mode. See JCC's installation instructions for more information. 
+
+The rest of setup instructions for configuring Py-Lucene can be found in docs/install
+
+------------------------------------------
+
+For more information see:
+http://wiki.apache.org/lucene-java/NearRealtimeSearch
+Note that NearRealtimeSearch has been available beginning with Lucene 2.9
+
+
+
