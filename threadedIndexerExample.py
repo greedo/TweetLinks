@@ -6,31 +6,37 @@
 # just import all
 from threadedSearch import *
 
-# STORE_DIR - is the location where you want the index stored
-STORE_DIR = "index"
+def main(args):
 
-# start the JVM
-env=lucene.initVM()
+	# STORE_DIR - is the location where you want the index stored	
+	STORE_DIR = "index"
 
-# Make FSDirectory from the specified STORE_DIR
-directory = SimpleFSDirectory(File(STORE_DIR))
+	# start the JVM
+	env=lucene.initVM()
 
-# what directory we want to index
-directoryToWalk = 'mini_newsgroups'
-
-# For now I just use the StandardAnalyzer, but you can change this
-# This one is just the Lucene default one
-analyzer = StandardAnalyzer(Version.LUCENE_CURRENT)
+	# Make FSDirectory from the specified STORE_DIR
+	directory = SimpleFSDirectory(File(STORE_DIR))
 	
-# we will need a writer
-writer = IndexWriter(directory,analyzer,True,IndexWriter.MaxFieldLength.LIMITED)
-writer.setMaxFieldLength(1048576)
+	# what directory we want to index
+	directoryToWalk = 'mini_newsgroups'
 
-# Create the indexer 
-indexer = Indexer(STORE_DIR,writer,directoryToWalk)
+	# For now I just use the StandardAnalyzer, but you can change this
+	# This one is just the Lucene default one
+	analyzer = StandardAnalyzer(Version.LUCENE_CURRENT)
+	
+	# we will need a writer
+	writer = IndexWriter(directory,analyzer,True,IndexWriter.MaxFieldLength.LIMITED)
+	writer.setMaxFieldLength(1048576)
 
-#This allow the thread to terminate on a SIGINT
-indexer.setDaemon(True)
+	# Create the indexer 
+	indexer = Indexer(STORE_DIR,writer,directoryToWalk)
 
-# Start the indexer
-indexer.start()
+	#This allow the thread to terminate on a SIGINT
+	indexer.setDaemon(True)
+
+	# Start the indexer
+	indexer.start()
+	
+if __name__ == "__main__":
+	import sys
+	main(sys.argv)

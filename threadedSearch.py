@@ -22,15 +22,16 @@ import threading, signal
 class Indexer(threading.Thread):
 
 	# set some initial values for the class, the root directory to start indexing and pass in a writer instance
-	def __init__(self, root, writer):
+	def __init__(self, root, writer,directoryToWalk):
 		threading.Thread.__init__(self)
 		self.root = root
 		self.writer = writer
+		self.directory = directoryToWalk
 		
 	def run(self):
 		env.attachCurrentThread()
 		# begin the index
-		for dirname, dirnames, filenames in os.walk('mini_newsgroups'):
+		for dirname, dirnames, filenames in os.walk(self.directory):
 			for subdirname in dirnames:
 		
 				# the first directory to index
