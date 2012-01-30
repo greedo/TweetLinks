@@ -119,6 +119,9 @@ if __name__ == '__main__':
 		
 	directory = SimpleFSDirectory(File(STORE_DIR))
 	
+	# what directory we want to index
+	directoryToWalk = 'mini_newsgroups'
+	
 	# For now I just use the StandardAnalyzer, but you can change this
 	analyzer = StandardAnalyzer(Version.LUCENE_CURRENT)
 	
@@ -131,7 +134,7 @@ if __name__ == '__main__':
 	
 	# and start the indexer
 	# note the indexer thread is set to daemon causing it to terminate on a SIGINT
-	indexer = Indexer(STORE_DIR,writer)
+	indexer = Indexer(STORE_DIR,writer,directoryToWalk)
 	indexer.setDaemon(True)
 	indexer.start()
 	print 'Starting Indexer in background...'
